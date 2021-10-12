@@ -32,7 +32,7 @@ function SortSearch (props) {
             const context=this;
             timeoutID = setTimeout(()=>{
                 // fn.call(context,...args);
-                // console.log(value);
+                console.log(value);
                 setValue(value);
                 searchGrocery(value);
             },waitTime);
