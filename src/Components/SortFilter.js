@@ -1,43 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-function useDebounce(value, delay) {
-    const [debouncedValue, setDebouncedValue] = useState(value);
-  
-    useEffect(
-      () => {
-        const handler = setTimeout(() => {
-          setDebouncedValue(value);
-        }, delay);
-        return () => {
-          clearTimeout(handler);
-        };
-      },
-      [value] 
-    );
-  
-    return debouncedValue;
-};
-
 function SortSearch (props) {
 
     const dispatch = useDispatch();
 
     const [value, setValue] = useState("");
 
-    function debounce(val, waitTime){
+    function debounce(fn, waitTime){
         let timeoutID;
         return function(...args){
+
             clearTimeout(timeoutID);
             const context=this;
             timeoutID = setTimeout(()=>{
-                // fn.call(context,...args);
-                console.log(value);
-                setValue(value);
-                searchGrocery(value);
+                fn.call(context,args[0]);
             },waitTime);
         };
-    };
+    }
 
     const sortByName = ()=>{
         return dispatch({
@@ -70,7 +50,9 @@ function SortSearch (props) {
                         // useDebounce(value,1000);
                         // console.log(value);
                         setValue(value);
-                        searchGrocery(value);
+                        const debounced = debounce(searchGrocery,1000);
+                        debounced.call({value:value},value);
+                        // searchGrocery(value);
                     }} />
             </div>
         </>

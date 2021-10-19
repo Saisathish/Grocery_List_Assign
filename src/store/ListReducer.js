@@ -1,10 +1,13 @@
 import {createStore} from 'redux';
 
 const initialState = [];
+// const initialStateMap = new Map();
 
 function listReducer(currentState = initialState, action){
     switch(action.type){
         case "ADD_GROCERY": {
+            // currentState.set(action.name,{name: action.name, count:1, isCompleted:false, isVisible:true});
+            // return currentState;
             return [...currentState,{name: action.name, count:1, isCompleted:false, isVisible:true}];
         };
         case "TOGGLE":{
@@ -14,6 +17,10 @@ function listReducer(currentState = initialState, action){
                 }
                 return el;
             })
+            // if(currentState.has(action.name)){
+            //     var itemData = currentState.get(action.name);
+            //     itemData.isCompleted = !itemData.isCompleted;
+            // }
         };
         case "INCREMENT":{
             return currentState.map((el)=>{
