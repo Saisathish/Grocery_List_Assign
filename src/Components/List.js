@@ -33,7 +33,7 @@ function DisplayList (){
 return (
     <>
     <h2>All grocery items</h2>
-    {groceryList.length != 0 ? (
+    {groceryList.length !== 0 ? (
       <>
       <SortEl />
       <ul className='grocery-list'>

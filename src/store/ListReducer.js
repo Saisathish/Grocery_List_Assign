@@ -5,12 +5,8 @@ const initialState = [];
 
 function listReducer(currentState = initialState, action){
     switch(action.type){
-        case "ADD_GROCERY": {
-            // currentState.set(action.name,{name: action.name, count:1, isCompleted:false, isVisible:true});
-            // return currentState;
-            return [...currentState,{name: action.name, count:1, isCompleted:false, isVisible:true}];
-        };
-        case "TOGGLE":{
+        case "ADD_GROCERY": return [...currentState,{name: action.name, count:1, isCompleted:false, isVisible:true}];
+        case "TOGGLE":
             return currentState.map((el)=>{
                 if(el.name === action.name){
                     return {...el, isCompleted:!el.isCompleted};
@@ -21,16 +17,14 @@ function listReducer(currentState = initialState, action){
             //     var itemData = currentState.get(action.name);
             //     itemData.isCompleted = !itemData.isCompleted;
             // }
-        };
-        case "INCREMENT":{
+        case "INCREMENT":
             return currentState.map((el)=>{
                 if(el.name === action.name){
                     return {...el, count: el.count + 1};
                 }
                 return el;
-            })
-        };
-        case "DECREMENT":{
+            });
+        case "DECREMENT":
             return currentState.map((el)=>{
                 if(el.name === action.name){
                     if(el.count > 1){
@@ -39,9 +33,8 @@ function listReducer(currentState = initialState, action){
                     
                 }
                 return el;
-            })
-        };
-        case "SEARCH":{
+            });
+        case "SEARCH":
             if(action.search === ""){
                 return currentState.map((el)=>{
                     return {...el,isVisible:true};
@@ -53,14 +46,13 @@ function listReducer(currentState = initialState, action){
                     }
                     return el;
                 })
-            }
+            };
             
             // const filteredList = currentState.filter((grocery)=>{
             //     if(action.search === "") return grocery;
             //     return grocery.name.toLowerCase().includes(action.search.toLowerCase());
             // });
             // return filteredList;
-        };
         case "SORT_BY_NAME":{
             const tempState = [].concat(currentState).sort((i,j)=>{
                 if(i["name"]<j["name"]) return -1;
@@ -79,16 +71,14 @@ function listReducer(currentState = initialState, action){
             console.log(tempState);
             return tempState;
         };
-        case "MARK_ALL_DONE": {
+        case "MARK_ALL_DONE": 
             return currentState.map((el)=>{
                 return {...el,isCompleted:true};
             });
-        };
-        case "MARK_ALL_UNDONE": {
+        case "MARK_ALL_UNDONE": 
             return currentState.map((el)=>{
                 return {...el,isCompleted:false};
             });
-        };
         case "CLEAR_ALL": {
             return initialState ;
         }
