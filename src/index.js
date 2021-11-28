@@ -10,6 +10,8 @@ Sentry.init({
   dsn: "https://df766659db9143a4a5ab33444393744e@o1078306.ingest.sentry.io/6081916",
   integrations: [new Integrations.BrowserTracing()],
   environment: "development",
+  debug: true,
+  release: "grocery-list-app@1.1.11",
   // We recommend adjusting this value in production, or using tracesSampler
   // for finer control
   tracesSampleRate: 1.0,
